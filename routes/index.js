@@ -5,10 +5,10 @@ var router = express.Router();
 router.get('/auth', function(req, res, next) {
   const { hasura_api_key } = req.headers;
 
-  if (hasura_api_key === '123456') {
+  if (hasura_api_key === process.env.HASURA_API_KEY) {
     res.json({
       "X-Hasura-Role": "readonly",
-      "X-Hasura-Access-Key": "987654"
+      "X-Hasura-Access-Key": process.env.X_HASURA_ACCESS_KEY
     });
   } else {
     res.status(401).json({
